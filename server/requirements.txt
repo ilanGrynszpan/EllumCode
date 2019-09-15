@@ -1,3 +1,4 @@
+configparser==4.0.2
 Django==2.2.5
 djangorestframework==3.10.3
 pytz==2019.2
