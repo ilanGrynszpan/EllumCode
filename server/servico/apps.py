@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class ServicoConfig(AppConfig):
-    name = 'servico'
+class ServiceManagerConfig(AppConfig):
+    name = 'service_manager'

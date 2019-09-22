@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class CreditoConfig(AppConfig):
-    name = 'credito'
+class CreditManagerConfig(AppConfig):
+    name = 'credit_manager'
