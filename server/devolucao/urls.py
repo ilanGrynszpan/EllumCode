@@ -1,7 +1,12 @@
+  
 from django.urls import path, include
-from . import views
+from .views import DevolucaoViewSet
 from rest_framework import routers
 
+router = routers.SimpleRouter()
+router.register(r'devolucoes', DevolucaoViewSet)
+
 urlpatterns = [
-    path('', views.DevolucaoList.as_view(), name='devolucaolist')
+    path(r'', include(router.urls)),
+    path(r'api-auth/', include('rest_framework.urls')),
 ]

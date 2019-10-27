@@ -10,11 +10,15 @@ from rest_framework.views import APIView
 from usuario.models import Usuario 
 from carteira.models import Carteira
 from carteira.serializers import CarteiraSerializer
+from devolucao.models import Devolucao
+from devolucao.serializers import DevolucaoSerializer
 from rest_framework import viewsets
 
 from django.views.decorators.csrf import csrf_exempt
 
 import datetime
+from datetime import timedelta
+from django.utils import timezone
 
 class CreditoViewSet(viewsets.ModelViewSet):
 
@@ -68,7 +72,8 @@ class CreditoViewSet(viewsets.ModelViewSet):
             return Response("previously_conceeded")
         
         print(serializer.data['servico_id'])
-        print(Carteira.objects.get(id_servico = serializer.data['servico_id']))
+        selected_wallet = Carteira.objects.get(id_servico = str(serializer.data['servico_id']))
+        selected_wallet_serialized = CarteiraSerializer(selected_wallet)
 
         credito_atual_servico = CarteiraSerializer(Carteira.objects.get(id_servico = serializer.data['servico_id']))\
         .data['credito']
@@ -76,3 +81,14 @@ class CreditoViewSet(viewsets.ModelViewSet):
         Credito.objects.filter(credito_id = pk).update(situacao = "aprovado")
         Carteira.objects.filter(id_servico = serializer.data['servico_id'])\
         .update(credito = float(credito_atual_servico) + float(serializer.data['valor']))
+
+        # devolucao
+
+        devolucao_id = pk
+        user_id = CarteiraSerializer(selected_wallet).data['id_usuario']
+        valor_dev = float(serializer.data['valor']) * (1 + float(serializer.data['taxa_juros']))
+        data_vencimento = timezone.now() + timedelta(days=30)
+
+        cadastro_devolucao = Devolucao(devolucao_id, user_id, valor_dev, data_vencimento)
+        cadastro_devolucao.clean()
+        cadastro_devolucao.save()

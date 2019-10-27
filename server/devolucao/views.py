@@ -1,3 +1,6 @@
+from django.http import HttpResponse
+
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from rest_framework import generics
 from .models import Devolucao
@@ -5,26 +8,27 @@ from .serializers import DevolucaoSerializer
 
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import viewsets
 
-from uuid import uuid4
+from django.views.decorators.csrf import csrf_exempt
 
-# Create your views here.
-
-class DevolucaoList(generics.ListCreateAPIView):
+class DevolucaoViewSet(viewsets.ModelViewSet):
 
     queryset = Devolucao.objects.all()
     serializer_class = DevolucaoSerializer
 
-    parser_classes = (JSONParser,)
-
-    def get_queryset(self):
-        """
-        This view should return a list of all the purchases for
-        the user as determined by the username portion of the URL.
-        """
+    def list(self, request):
 
         queryset = Devolucao.objects.all()
-        serializer_class = DevolucaoSerializer(many = True)
+        serializer = DevolucaoSerializer(queryset, many = True)
+        print(request)
+        return Response(serializer.data)
 
-        return queryset
+    def retrieve(self, request, pk = None):
+
+        if len(pk) < 1:
+            return HttpResponseNotFound("notfound")
+        
+        selected_dev = Devolucao.objects.get(id_devolucao = pk)
+        serializer = DevolucaoSerializer(selected_dev)
+        return Response(serializer.data)
