@@ -1,8 +1,12 @@
   
 from django.urls import path, include
-from . import views
+from .views import PagamentoViewSet
 from rest_framework import routers
 
+router = routers.SimpleRouter()
+router.register(r'pagamentos', PagamentoViewSet)
+
 urlpatterns = [
-    path('', views.PagamentoList.as_view(), name='paymentlist')
+    path(r'', include(router.urls)),
+    path(r'api-auth/', include('rest_framework.urls')),
 ]
