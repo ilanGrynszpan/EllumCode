@@ -11,6 +11,8 @@ from rest_framework.views import APIView
 
 from django.views.decorators.csrf import csrf_exempt
 
+from django.db import models
+
 class PagamentoList(generics.ListCreateAPIView):
 
     queryset = Pagamento.objects.all()

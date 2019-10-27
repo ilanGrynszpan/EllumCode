@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from rest_framework import generics
 from .models import Carteira
@@ -7,29 +8,28 @@ from .serializers import CarteiraSerializer
 
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import viewsets
 
 from django.views.decorators.csrf import csrf_exempt
 
-class CarteiraList(generics.ListCreateAPIView):
+class CarteiraViewSet(viewsets.ModelViewSet):
 
     queryset = Carteira.objects.all()
     serializer_class = CarteiraSerializer
 
-    parser_classes = (JSONParser,)
-
-    def get_queryset(self):
-        """
-        This view should return a list of all the purchases for
-        the user as determined by the username portion of the URL.
-        """
+    def list(self, request):
 
         queryset = Carteira.objects.all()
-        serializer_class = CarteiraSerializer(many = True)
+        print("aqui irmao")
+        serializer = CarteiraSerializer(queryset, many = True)
+        print(request)
+        return Response(serializer.data)
 
-        service_id = self.request.query_params.get('service_id', None)
+    def retrieve(self, request, pk = None):
+
+        if len(pk) < 1:
+            return HttpResponseNotFound("notfound")
         
-        if service_id is not None:
-            queryset = queryset.filter(service_id=service_id)
-
-        return queryset
+        selected_wallet = Carteira.objects.get(id_servico = pk)
+        serializer = CarteiraSerializer(selected_wallet)
+        return Response(serializer.data)
