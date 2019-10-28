@@ -14,4 +14,5 @@ class Usuario(models.Model):
     cpf = models.CharField(max_length = 14)
     celular = models.CharField(max_length = 9)
     senha = models.CharField(max_length = 15)
+    is_logged = models.BooleanField(default = False)
     

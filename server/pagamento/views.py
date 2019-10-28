@@ -86,7 +86,7 @@ class PagamentoViewSet(viewsets.ModelViewSet):
                 self.transfer_payment(pk)
                 return Response("authorized")
             
-            elif request.data['token'] == payment_serialized.data['token'] and len(request.data['token']) > 0:
+            elif request.data['token'] != payment_serialized.data['token'] and len(request.data['token']) > 0:
                 return Response("not_auth_wrong_token")
             
             return Response("no_token_received")

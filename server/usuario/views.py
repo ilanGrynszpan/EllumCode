@@ -3,43 +3,59 @@ from django.shortcuts import render
 from .models import Usuario
 from .serializers import UsuarioSerializer
 
-from rest_framework import generics
+from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import viewsets
 
-# Create your views here.
+from django.views.decorators.csrf import csrf_exempt
 
-class UsuarioView(generics.ListCreateAPIView):
+from rest_framework.decorators import action
 
+class UsuarioViewSet(viewsets.ModelViewSet):
+
+    queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
 
-    def get_queryset(self):
-        """
-        Optionally restricts the returned purchases to a given user,
-        by filtering against a `username` query parameter in the URL.
-        """
+    def list(self, request):
+
         queryset = Usuario.objects.all()
+        serializer = UsuarioSerializer(queryset, many = True)
+        print(request)
+        return Response(serializer.data)
 
-        try:
+    def retrieve(self, request, pk = None):
+
+        if len(pk) < 1:
+            return HttpResponseNotFound("notfound")
         
-            celular = self.kwargs['celular']
-            senha = self.kwargs['senha']
+        selected_user = Usuario.objects.get(id_usuario = pk)
+        serializer = UsuarioSerializer(selected_user)
+        return Response(serializer.data)
 
-            if celular is not None and senha is not None:
-                
-                queryset = queryset.filter(celular = celular)
-                passcode_check = UsuarioSerializer(queryset[0]).data['senha']
+    @action(detail = True, methods = ['get','post'])
+    def auth_user(self, request, pk = None):
 
-                print(passcode_check)
+        if 'cpf' not in request.data:
+            return Response("no_cpf_was_sent")
+ 
+        elif len(request.data['cpf']) == 0:
+            return Response("no_cpf_input")
 
-                if passcode_check != senha:
+        user = Usuario.objects.filter(cpf = request.data['cpf'])
 
-                    queryset = Usuario.objects.all()
-        
-        except KeyError:
+        if len(user) == 0:
+            return Response("no_such_cpf_on_records")
 
-            print("there was a key error")
+        user_serialized = UsuarioSerializer(user[0])
 
-        return queryset
-        
-        
+        pk = user_serialized.data['id_usuario']
+
+        if request.data['senha'] == user_serialized.data['senha']:
+
+            Usuario.objects.filter(id_usuario = pk).update(is_logged = True)
+            return Response(user_serialized.data)
+            
+        elif request.data['senha'] != user_serialized.data['senha'] and len(request.data['senha']) > 0:
+            return Response("not_auth_wrong_passcode")
+            
+        return Response("no_passcode_received")
