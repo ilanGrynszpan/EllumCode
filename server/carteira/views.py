@@ -20,7 +20,6 @@ class CarteiraViewSet(viewsets.ModelViewSet):
     def list(self, request):
 
         queryset = Carteira.objects.all()
-        print("aqui irmao")
         serializer = CarteiraSerializer(queryset, many = True)
         print(request)
         return Response(serializer.data)

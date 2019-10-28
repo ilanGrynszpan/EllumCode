@@ -9,7 +9,7 @@ class Usuario(models.Model):
 
         db_table = 'usuario'
 
-    id_usuario = models.UUIDField(primary_key=True, default = uuid4(), editable=False)
+    id_usuario = models.CharField(primary_key=True, max_length = 150, default = str(uuid4()).replace('-', ''), editable=False)
     nome = models.CharField(max_length = 50)
     cpf = models.CharField(max_length = 14)
     celular = models.CharField(max_length = 9)
