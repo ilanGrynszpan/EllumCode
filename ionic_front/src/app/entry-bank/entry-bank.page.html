@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cadastro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-grid>
+
+        <ion-row>
+            <ion-col class="ellum-login" size="12">
+              <ion-label class="content-login">Cadastro de informações bancárias, se não possuir conta somente deixe em branco.</ion-label>
+            </ion-col>
+      
+          </ion-row>
+
+
+        <ion-row>
+          <ion-col class="ellum-login" size="12">
+            <ion-label class="content-login">Banco</ion-label>
+            <ion-input></ion-input>
+          </ion-col>
+    
+        </ion-row>
+    
+        <ion-row>
+          <ion-col class="ellum-login" size="12">
+            <ion-label class="content-login">Agência</ion-label>
+            <ion-input></ion-input>
+          </ion-col>
+        </ion-row>
+    
+        <ion-row>
+          <ion-col class="ellum-login" size="12">
+            <ion-label class="content-login">Conta</ion-label>
+            <ion-input></ion-input>
+          </ion-col>
+    
+        </ion-row>
+    
+        
+    
+        <ion-row>
+          <ion-col class="ellum-login" size="12">
+            <ion-button expand="block" (click)='this.goHome()' class="entry-button" fill="outline">ENVIAR</ion-button>
+          </ion-col>
+    
+        </ion-row>
+
+        <ion-row>
+            <ion-col class="ellum-login" size="12">
+              <ion-button expand="block" (click)='this.goHome()' class="entry-button" fill="outline">NÃO POSSUO CONTA</ion-button>
+            </ion-col>
+      
+          </ion-row>
+    
+        <ion-row>
+          <ion-col class="ellum-login" size="12">
+            <ion-button expand="block" (click)='this.goBack()' class="entry-button" fill="outline">VOLTAR</ion-button>
+          </ion-col>
+    
+        </ion-row>
+      </ion-grid>
+    
+
+</ion-content>

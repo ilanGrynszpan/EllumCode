@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Entrar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-grid>
+        
+
+        <ion-row>
+            <ion-col class="ellum-login" size="12">
+              <ion-label class="content-login">CPF (sem pontos ou traços)</ion-label>
+              <ion-input></ion-input>
+            </ion-col>
+      
+          </ion-row>
+
+          <ion-row>
+              <ion-col class="ellum-login" size="12">
+                <ion-label class="content-login">Senha</ion-label>
+                <ion-input></ion-input>
+              </ion-col>
+        
+            </ion-row>
+
+            <ion-row>
+                <ion-col class="ellum-login" size="12">
+                    <ion-button expand="block" (click)='this.goHome()' class = "entry-button" fill="outline">ENTRAR</ion-button>
+                </ion-col>
+          
+              </ion-row>
+
+              <ion-row>
+                  <ion-col class="ellum-login" size="12">
+                      <ion-button expand="block" (click)='this.goBack()' class = "entry-button" fill="outline">VOLTAR</ion-button>
+                  </ion-col>
+            
+                </ion-row>
+    </ion-grid>
+    
+
+</ion-content>
