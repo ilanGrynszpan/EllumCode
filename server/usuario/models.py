@@ -1,6 +1,8 @@
 from django.db import models
 from uuid import uuid4
 
+from django.utils.timezone import now
+
 # Create your models here.
 
 class Usuario(models.Model):
@@ -15,4 +17,14 @@ class Usuario(models.Model):
     celular = models.CharField(max_length = 9)
     senha = models.CharField(max_length = 15)
     is_logged = models.BooleanField(default = False)
+
+    # banking information
+
+    banco = models.CharField(max_length = 50, default = '')
+    agencia = models.CharField(max_length = 10, default = '')
+    conta = models.CharField(max_length = 10, default = '')
+
+    # profile information
+
+    creation_date = models.DateTimeField(default = now, blank = True, editable = False)
     

@@ -59,3 +59,86 @@ class UsuarioViewSet(viewsets.ModelViewSet):
             return Response("not_auth_wrong_passcode")
             
         return Response("no_passcode_received")
+
+    @action(detail = True, methods = ['get','post'])
+    def set_banking_information(self, request, pk = None):
+        
+        if 'banco' not in request.data:
+            return Response("no_bank_was_sent")
+        
+        elif 'conta' not in request.data:
+            return Response("no_acc_was_sent")
+        
+        elif 'agencia' not in request.data:
+            return Response("no_agency_was_sent")
+ 
+        elif len(request.data['banco']) == 0:
+            return Response("no_banco_input")
+        
+        elif len(request.data['conta']) == 0:
+            return Response("no_acc_input")
+        
+        elif len(request.data['agencia']) == 0:
+            return Response("no_agency_input")
+
+        user = Usuario.objects.filter(id_usuario = pk)
+
+        if len(user) == 0:
+            return Response("no_such_user_id_on_records")
+        
+        elif len(user) > 1:
+            return Response("error_user_id_repeated_on_records")
+
+        user.update(banco = request.data['banco'],\
+        conta = request.data['conta'],\
+        agencia = request.data['agencia'])
+
+        user_serialized = UsuarioSerializer(user[0])
+        return Response(user_serialized.data)
+    
+    @action(detail = True, methods = ['get','post'])
+    def set_user_unlogged(self, request, pk = None):
+
+        if pk is None or len(str(pk)) == 0:
+            return Response("no_user_sent")
+        
+        user = Usuario.objects.filter(id_usuario = pk)
+
+        if len(user) == 0:
+            return Response("no_such_user_id_on_records")
+        
+        elif len(user) > 1:
+            return Response("error_user_id_repeated_on_records")
+
+        user_serialized = UsuarioSerializer(user[0])
+
+        if user_serialized.data['is_logged'] == True:
+            Usuario.objects.filter(id_usuario = pk).update(is_logged = False)
+            user_serialized = UsuarioSerializer(user[0])
+            return Response("user_is_now_logged_out")
+        
+        return Response("user_is_already_logged_out")
+
+    @action(detail = True, methods = ['get','post'])
+    def set_user_logged(self, request, pk = None):
+
+        if pk is None or len(str(pk)) == 0:
+            return Response("no_user_sent")
+        
+        user = Usuario.objects.filter(id_usuario = pk)
+
+        if len(user) == 0:
+            return Response("no_such_user_id_on_records")
+        
+        elif len(user) > 1:
+            return Response("error_user_id_repeated_on_records")
+
+        user_serialized = UsuarioSerializer(user[0])
+
+        if user_serialized.data['is_logged'] == False:
+            user.update(is_logged = True)
+            user_serialized = UsuarioSerializer(user[0])
+            return Response("user_is_now_logged_in")
+        
+        return Response("user_is_already_logged_in")
+        
