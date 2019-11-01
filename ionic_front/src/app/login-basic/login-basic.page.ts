@@ -20,7 +20,8 @@ export class LoginBasicPage implements OnInit {
 
   constructor(private router: Router, 
     private http: HttpClient, 
-    private rest_urls: RestUrlsService) { }
+    private rest_urls: RestUrlsService,
+    private storage: Storage) { }
 
   ngOnInit() {
   }
@@ -32,6 +33,12 @@ export class LoginBasicPage implements OnInit {
       (data) => {
 
         console.log(data);
+        this.storage.set('nome', data['nome']);
+        this.storage.set('cpf', data['cpf']);
+        this.storage.set('celular', data['celular']);
+        this.storage.set('id_usuario', data['id_usuario']);
+      
+        this.router.navigate(['/tabs/tab1']);
       },
 
       (error) => {
@@ -39,8 +46,6 @@ export class LoginBasicPage implements OnInit {
         console.log(error);
       }
     );
-
-    //this.router.navigate(['/tabs/tab1']);
   }
 
   goBack(){
