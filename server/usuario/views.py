@@ -40,6 +40,12 @@ class UsuarioViewSet(viewsets.ModelViewSet):
  
         elif len(request.data['cpf']) == 0:
             return Response("no_cpf_input")
+        
+        if 'senha' not in request.data:
+            return Response("no_passcode_was_sent")
+ 
+        elif len(request.data['senha']) == 0:
+            return Response("no_passcode_input")
 
         user = Usuario.objects.filter(cpf = request.data['cpf'])
 
