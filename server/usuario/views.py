@@ -3,6 +3,12 @@ from django.shortcuts import render
 from .models import Usuario
 from .serializers import UsuarioSerializer
 
+from carteira.models import Carteira
+from carteira.serializers import CarteiraSerializer
+
+from servico.models import Servico
+from servico.serializers import ServicoSerializer
+
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import viewsets
@@ -31,6 +37,66 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         selected_user = Usuario.objects.get(id_usuario = pk)
         serializer = UsuarioSerializer(selected_user)
         return Response(serializer.data)
+
+    def create(self, request):
+
+        create_data = request.data
+
+        if 'nome' not in create_data:
+            return Response("no_name_sent")
+        
+        elif 'cpf' not in create_data:
+            return Response("no_cpf_sent")
+        
+        elif 'celular' not in create_data:
+            return Resposne('no_cellphone_sent')
+        
+        elif 'senha' not in create_data:
+            return Response('no_passcode_sent')
+
+        check_cpf_exists = Usuario.objects.filter(cpf = create_data['cpf'])
+        check_celular_exists = Usuario.objects.filter(celular = create_data['celular'])
+        
+        if len(check_cpf_exists) > 0:
+            return Response('user_cpf_already_registered')
+        
+        elif len(check_celular_exists) > 0:
+            return Response('user_celular_already_registered')
+
+        new_user = Usuario(nome = create_data['nome'],\
+        cpf = create_data['cpf'],\
+        celular = create_data['celular'],\
+        senha = create_data['senha'])
+
+        new_user.clean()
+        new_user.save()
+
+        user_get = Usuario.objects.filter(cpf = create_data['cpf'])
+        user_get_data = UsuarioSerializer(user_get[0])
+
+        #return Response(user_get_data.data)
+
+        first_service = Servico(id_usuario = user_get_data.data['id_usuario'],\
+        area_atuacao = 'master',\
+        nome_servico = 'service_master_name3558')
+
+        first_service.clean()
+        first_service.save()
+
+        service_data = ServicoSerializer(first_service)
+
+        #return Response(service_data.data)
+
+        user_wallet = Carteira(id_usuario = user_get_data.data['id_usuario'],\
+        id_servico = service_data.data['id_servico'],\
+        credito = 0.00)
+
+        user_wallet.clean()
+        user_wallet.save()
+
+        wallet_get_data = CarteiraSerializer(user_wallet)
+        return Response([user_get_data.data, service_data.data, wallet_get_data.data])
+
 
     @action(detail = True, methods = ['get','post'])
     def auth_user(self, request, pk = None):
