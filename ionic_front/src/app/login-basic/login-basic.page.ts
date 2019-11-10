@@ -28,24 +28,58 @@ export class LoginBasicPage implements OnInit {
 
   goHome(){
 
+    if(this.data_pckg.cpf == '') {
+
+      console.log("no entry");
+      return;
+    }
+
     this.http.post(this.rest_urls.rest_urls['usuario'] + '123/auth_user/', this.data_pckg).subscribe(
 
       (data) => {
 
+        if(data == "not_auth_wrong_passcode") {
+
+          console.log("passcode wrong");
+          return;
+        }
+
+        else if(data == "no_passcode_input") {
+
+          console.log("no passcode input");
+          return;
+        }
+
         console.log(data);
-        this.storage.set('nome', data['nome']);
-        this.storage.set('cpf', data['cpf']);
-        this.storage.set('celular', data['celular']);
-        this.storage.set('id_usuario', data['id_usuario']);
-      
-        this.router.navigate(['/tabs/tab1']);
-      },
+        this.storage.set('nome', data['usuario']['nome']);
+        this.storage.set('cpf', data['usuario']['cpf']);
+        this.storage.set('celular', data['usuario']['celular']);
+        this.storage.set('id_usuario', data['usuario']['id_usuario']).then((val) => {
 
-      (error) => {
+          this.storage.get('id_usuario').then((val) => {
 
-        console.log(error);
-      }
-    );
+            console.log(val);
+
+            if(val == data['usuario']['id_usuario']) {
+
+              console.log("right");
+              this.router.navigate(['/tabs/tab1']);
+            }
+
+            else {
+
+              console.log("wrong");
+            }
+          });
+
+        },
+
+        (error) => {
+
+          console.log(error);
+        }
+      );
+      });
   }
 
   goBack(){

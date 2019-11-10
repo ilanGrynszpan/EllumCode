@@ -125,7 +125,19 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         if request.data['senha'] == user_serialized.data['senha']:
 
             Usuario.objects.filter(id_usuario = pk).update(is_logged = True)
-            return Response(user_serialized.data)
+            service_data = Servico.objects.filter(id_usuario = pk)
+            wallet_data = Carteira.objects.filter(id_usuario = pk)
+
+            user_services = []
+
+            for service in service_data:
+
+                service_serialized = ServicoSerializer(service)
+                service_wallet = Carteira.objects.filter(id_servico = service_serialized.data["id_servico"])
+                service_wallet_serialized = CarteiraSerializer(service_wallet[0])
+                user_services.append({"servico":service_serialized.data, "carteira":service_wallet_serialized.data})
+
+            return Response({"usuario":user_serialized.data, "servicos":user_services})
             
         elif request.data['senha'] != user_serialized.data['senha'] and len(request.data['senha']) > 0:
             return Response("not_auth_wrong_passcode")
