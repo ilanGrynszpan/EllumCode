@@ -12,30 +12,30 @@
     <ion-row>
       <ion-col class="ellum-login" size="12">
         <ion-label class="content-login">Nome completo</ion-label>
-        <ion-input></ion-input>
+        <ion-input class="nome_input" [(ngModel)] = "this.new_user.nome" placeholder = "Nome"></ion-input>
       </ion-col>
 
     </ion-row>
 
     <ion-row>
       <ion-col class="ellum-login" size="12">
-        <ion-label class="content-login">Celular</ion-label>
-        <ion-input></ion-input>
+        <ion-label class="content-login">Celular (com DDD, somente números)</ion-label>
+        <ion-input class="celular_input" [(ngModel)]="this.new_user.celular" placeholder = "DD9XXXXXXXX"></ion-input>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col class="ellum-login" size="12">
         <ion-label class="content-login">CPF (sem pontos ou traços)</ion-label>
-        <ion-input></ion-input>
+        <ion-input class="cpf_input" [(ngModel)]="this.new_user.cpf" placeholder = "XXXXXXXXXXX"></ion-input>
       </ion-col>
 
     </ion-row>
 
     <ion-row>
       <ion-col class="ellum-login" size="12">
-        <ion-label class="content-login">Senha</ion-label>
-        <ion-input></ion-input>
+        <ion-label class="content-login">Senha (no mínimo 6 caracteres)</ion-label>
+        <ion-input class="senha_input" [(ngModel)]="this.new_user.senha" placeholder = "Senha"></ion-input>
       </ion-col>
 
     </ion-row>

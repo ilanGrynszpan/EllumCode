@@ -13,13 +13,16 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     CommonModule,
     BrowserModule,
-    HttpClientModule, 
+    HttpClientModule,
+    FormsModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
     IonicStorageModule.forRoot()
