@@ -10,6 +10,7 @@ import { Storage } from '@ionic/storage';
 })
 export class Tab1Page {
 
+  private current_service_index = 0;
   private stored_data:any = {
 
     user:'',
@@ -32,8 +33,8 @@ export class Tab1Page {
             this.stored_data['user'] = val_user;
             this.stored_data['devolutions'] = val_devolution;
             this.stored_data['services'] = val_services;
-            this.stored_data['current_service'] = val_services[0]['servico'];
-            this.stored_data['current_wallet'] = val_services[0]['carteira'];
+            this.stored_data['current_service'] = val_services[this.current_service_index]['servico'];
+            this.stored_data['current_wallet'] = val_services[this.current_service_index]['carteira'];
           });
         });
       })
