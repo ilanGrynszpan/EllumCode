@@ -99,6 +99,26 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
 
     @action(detail = True, methods = ['get','post'])
+    def get_user_data(self, request, pk= None):
+
+        if pk is None:
+            return Response("no_primary_key_flag")
+
+        user = Usuario.objects.get(id_usuario = pk)
+        user_serialized = UsuarioSerializer(user)
+        user_services = []
+        service_data = Servico.objects.filter(id_usuario = pk)
+        
+        for service in service_data:
+
+            service_serialized = ServicoSerializer(service)
+            service_wallet = Carteira.objects.filter(id_servico = service_serialized.data["id_servico"])
+            service_wallet_serialized = CarteiraSerializer(service_wallet[0])
+            user_services.append({"servico":service_serialized.data, "carteira":service_wallet_serialized.data})
+
+        return Response({"usuario":user_serialized.data, "servicos":user_services})
+    
+    @action(detail = True, methods = ['get','post'])
     def auth_user(self, request, pk = None):
 
         if 'cpf' not in request.data:
@@ -125,19 +145,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         if request.data['senha'] == user_serialized.data['senha']:
 
             Usuario.objects.filter(id_usuario = pk).update(is_logged = True)
-            service_data = Servico.objects.filter(id_usuario = pk)
-            wallet_data = Carteira.objects.filter(id_usuario = pk)
-
-            user_services = []
-
-            for service in service_data:
-
-                service_serialized = ServicoSerializer(service)
-                service_wallet = Carteira.objects.filter(id_servico = service_serialized.data["id_servico"])
-                service_wallet_serialized = CarteiraSerializer(service_wallet[0])
-                user_services.append({"servico":service_serialized.data, "carteira":service_wallet_serialized.data})
-
-            return Response({"usuario":user_serialized.data, "servicos":user_services})
+            return Response({"flag":"auth_ok", "user_id":pk})
             
         elif request.data['senha'] != user_serialized.data['senha'] and len(request.data['senha']) > 0:
             return Response("not_auth_wrong_passcode")

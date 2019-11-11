@@ -51,19 +51,20 @@ export class LoginBasicPage implements OnInit {
         }
 
         console.log(data);
-        this.storage.set('nome', data['usuario']['nome']);
-        this.storage.set('cpf', data['usuario']['cpf']);
-        this.storage.set('celular', data['usuario']['celular']);
-        this.storage.set('id_usuario', data['usuario']['id_usuario']).then((val) => {
+        //this.storage.set('nome', data['usuario']['nome']);
+        //this.storage.set('cpf', data['usuario']['cpf']);
+        //this.storage.set('celular', data['usuario']['celular']);
+        this.storage.set('id_usuario', data['user_id']).then((val) => {
 
           this.storage.get('id_usuario').then((val) => {
 
             console.log(val);
 
-            if(val == data['usuario']['id_usuario']) {
+            if(val == data['user_id']) {
 
-              console.log("right");
-              this.router.navigate(['/tabs/tab1']);
+              console.log(val);
+              this.rest_urls.getUserInformation(val);
+              //this.router.navigate(['/tabs/tab1']);
             }
 
             else {

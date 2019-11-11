@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Storage } from '@ionic/storage';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +23,25 @@ export class RestUrlsService {
 
   };
   
-  constructor() { }
+  constructor(private router: Router, 
+    private http: HttpClient,
+    private storage: Storage) { }
+
+  public getUserInformation(user_id:String) : any {
+
+    console.log("getting info");
+
+    this.http.get(this.rest_urls['usuario'] + user_id + '/get_user_data/').subscribe(
+
+      (data) => {
+
+        console.log(data);
+      },
+
+      (error) => {
+
+        console.log(error);
+      }
+    );
+  }
 }
