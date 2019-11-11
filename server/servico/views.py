@@ -9,6 +9,11 @@ from .serializers import ServicoSerializer
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import viewsets
+
+import datetime
+from datetime import timedelta
+from django.utils import timezone
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -20,19 +25,38 @@ import json
 
 # Create your views here.
 
-class ServicoList(generics.ListCreateAPIView):
+class ServicoViewSet(viewsets.ModelViewSet):
 
     serializer_class = ServicoSerializer
+    queryset = Servico.objects.all()
 
-    parser_classes = (JSONParser,)
-
-    def get_queryset(self):
-        """
-        This view should return a list of all the purchases for
-        the user as determined by the username portion of the URL.
-        """
+    def list(self, request):
 
         queryset = Servico.objects.all()
-        serializer_class = ServicoSerializer(many = True)
+        serializer = ServicoSerializer(queryset, many = True)
+        print(request)
+        return Response(serializer.data)
 
-        return queryset
+    def retrieve(self, request, pk = None):
+
+        if len(pk) < 1:
+            return HttpResponseNotFound("notfound")
+        
+        selected_service = Servico.objects.get(id_servico = pk)
+        serializer = ServicoSerializer(selected_service)
+        return Response(serializer.data)
+    
+    def create(self, request):
+
+        create_data = request.data
+
+        id_servico = str(create_data['id_usuario']) + str(datetime.datetime.now().timestamp())
+        id_usuario = str(create_data['id_usuario'])
+        area_atuacao = str(create_data['area_atuacao'])
+        nome_servico = str(create_data['nome_servico'])
+
+        novo_servico = Servico(id_servico, id_usuario, area_atuacao, nome_servico)
+        novo_servico.clean()
+        novo_servico.save()
+
+        return(Response({"flag":"service_created", "data":ServicoSerializer(novo_servico).data}))

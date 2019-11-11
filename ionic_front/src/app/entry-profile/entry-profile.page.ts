@@ -25,6 +25,7 @@ export class EntryProfilePage implements OnInit {
 
   constructor(private router: Router, 
     private http: HttpClient, 
+    private storage: Storage,
     private toastController: ToastController,
     private rest_urls: RestUrlsService) { }
 
@@ -70,10 +71,37 @@ export class EntryProfilePage implements OnInit {
       (data) => {
 
         console.log(data);
+
+        if(data == "user_cpf_already_registered") {
+
+          this.presentToast("CPF já cadastrado.");
+          return;
+        }
+
+        else if(data == "user_celular_already_registered") {
+
+          this.presentToast("Celular já cadastrado.");
+          return;
+        }
+
+        this.storage.set('id_usuario', data[0]['id_usuario']).then(
+
+          (val) => {
+
+            this.router.navigate(['/entry-bank']);
+          },
+
+          (error) => {
+
+            this.presentToast("Falha inesperada");
+            console.log(error);
+          }
+        );
       },
 
       (error) => {
-
+        
+        this.presentToast("Falha inesperada");
         console.log(error);
       }
     );

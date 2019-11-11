@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'nolog-entry', loadChildren: './nolog-entry/nolog-entry.module#NologEntryPageModule' },
   { path: 'entry-profile', loadChildren: './entry-profile/entry-profile.module#EntryProfilePageModule' },
   { path: 'entry-bank', loadChildren: './entry-bank/entry-bank.module#EntryBankPageModule' },
-  { path: 'login-basic', loadChildren: './login-basic/login-basic.module#LoginBasicPageModule' }
+  { path: 'login-basic', loadChildren: './login-basic/login-basic.module#LoginBasicPageModule' },
+  { path: 'first-service', loadChildren: './first-service/first-service.module#FirstServicePageModule' }
 ];
 @NgModule({
   imports: [

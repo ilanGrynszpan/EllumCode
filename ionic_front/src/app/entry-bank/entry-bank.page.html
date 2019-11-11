@@ -19,7 +19,7 @@
         <ion-row>
           <ion-col class="ellum-login" size="12">
             <ion-label class="content-login">Banco</ion-label>
-            <ion-input></ion-input>
+            <ion-input class="bank-input" [(ngModel)]="this.bank_info.banco"></ion-input>
           </ion-col>
     
         </ion-row>
@@ -27,14 +27,14 @@
         <ion-row>
           <ion-col class="ellum-login" size="12">
             <ion-label class="content-login">Agência</ion-label>
-            <ion-input></ion-input>
+            <ion-input class="bank-agency-input" [(ngModel)]="this.bank_info.agencia"></ion-input>
           </ion-col>
         </ion-row>
     
         <ion-row>
           <ion-col class="ellum-login" size="12">
             <ion-label class="content-login">Conta</ion-label>
-            <ion-input></ion-input>
+            <ion-input class="bank-acc-input" [(ngModel)]="this.bank_info.conta"></ion-input>
           </ion-col>
     
         </ion-row>
@@ -43,14 +43,14 @@
     
         <ion-row>
           <ion-col class="ellum-login" size="12">
-            <ion-button expand="block" (click)='this.goHome()' class="entry-button" fill="outline">ENVIAR</ion-button>
+            <ion-button expand="block" (click)='this.setBankingData()' class="entry-button" fill="outline">ENVIAR</ion-button>
           </ion-col>
     
         </ion-row>
 
         <ion-row>
             <ion-col class="ellum-login" size="12">
-              <ion-button expand="block" (click)='this.goHome()' class="entry-button" fill="outline">NÃO POSSUO CONTA</ion-button>
+              <ion-button expand="block" (click)='this.goSubmit()' class="entry-button" fill="outline">NÃO POSSUO CONTA</ion-button>
             </ion-col>
       
           </ion-row>
