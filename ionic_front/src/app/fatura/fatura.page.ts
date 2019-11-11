@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-fatura',
@@ -8,9 +11,26 @@ import { Router } from '@angular/router';
 })
 export class FaturaPage implements OnInit {
 
-  constructor(private router: Router) { }
+  private devolucoes:any = [];
+
+  constructor(private router: Router,
+    private storage: Storage) { }
 
   ngOnInit() {
+
+    this.storage.get('devolution_info').then(
+
+      (val) => {
+
+        
+        this.devolucoes = val;
+      },
+
+      (error) => {
+
+         console.log(error);
+      }
+    );
   }
 
   goBack(){

@@ -25,26 +25,30 @@
     </ion-row>
 
     <ion-row>
+
       <ion-col class="ellum-card">
-        <ion-card class="content-card">
-          
+        <ion-card class="content-card" *ngFor = "let item of devolucoes">
 
           <ion-card-content>
             
             <ion-grid>
               <ion-row>
                 <ion-col size="12" class="content-card-noncap">
+
+                  <div *ngIf = "devolucoes?.length <= 0">
+                    Você não possui d~ividas pendentes.
+                  </div>
                   
-                  <ion-grid class="due-pay">
+                  <ion-grid class="due-pay" *ngIf = "devolucoes?.length > 0">
 
                     <ion-row>
                       <ion-col class="content-card-noncap">
-                        Vencimento em 15/08/2020
+                        Vencimento em {{ item.vencimento }}
                       </ion-col>
                     </ion-row>
                     <ion-row>
                       <ion-col class="due-pay-val">
-                        R$ 223,50
+                        R$ {{ item.valor }}
                       </ion-col>
                     </ion-row>
                     <ion-row>

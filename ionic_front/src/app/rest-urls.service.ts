@@ -36,6 +36,29 @@ export class RestUrlsService {
       (data) => {
 
         console.log(data);
+
+        this.storage.set("user_info", data['usuario']).then(
+
+          (val) => {
+
+            this.storage.set("devolution_info", data['devolucoes']).then (
+
+              (val) => {
+
+                this.storage.set("services_info", data['servicos']).then(
+
+                  (val) => {
+
+                    this.storage.get('services_info').then((val) => {
+
+                      return("ok_stored");
+                    })
+                  }
+                )
+              }
+            )
+          }
+        )
       },
 
       (error) => {

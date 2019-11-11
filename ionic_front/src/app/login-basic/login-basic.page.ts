@@ -64,7 +64,7 @@ export class LoginBasicPage implements OnInit {
 
               console.log(val);
               this.rest_urls.getUserInformation(val);
-              //this.router.navigate(['/tabs/tab1']);
+              this.router.navigate(['/tabs/tab1']);
             }
 
             else {

@@ -9,6 +9,9 @@ from carteira.serializers import CarteiraSerializer
 from servico.models import Servico
 from servico.serializers import ServicoSerializer
 
+from devolucao.models import Devolucao
+from devolucao.serializers import DevolucaoSerializer
+
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import viewsets
@@ -108,6 +111,13 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         user_serialized = UsuarioSerializer(user)
         user_services = []
         service_data = Servico.objects.filter(id_usuario = pk)
+
+        devolution_data = Devolucao.objects.filter(id_usuario = pk)
+        devolution_series = []
+
+        for devolution in devolution_series:
+            devolution_serialized = DevolucaoSerializer(devolution)
+            devolution_series.append(devolution_serialized.data)
         
         for service in service_data:
 
@@ -116,7 +126,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
             service_wallet_serialized = CarteiraSerializer(service_wallet[0])
             user_services.append({"servico":service_serialized.data, "carteira":service_wallet_serialized.data})
 
-        return Response({"usuario":user_serialized.data, "servicos":user_services})
+        return Response({"usuario":user_serialized.data, "devolucoes":devolution_series, "servicos":user_services})
     
     @action(detail = True, methods = ['get','post'])
     def auth_user(self, request, pk = None):

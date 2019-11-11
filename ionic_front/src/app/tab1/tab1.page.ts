@@ -10,20 +10,32 @@ import { Storage } from '@ionic/storage';
 })
 export class Tab1Page {
 
-  private stored_data:any = {};
+  private stored_data:any = {
+
+    user:'',
+    devolutions:[],
+    services:[],
+    current_service:{},
+    current_wallet:{}
+  };
 
   constructor(private router: Router,
     private storage: Storage) {}
 
     ngOnInit(){
-      this.storage.get('id_usuario').then((val) => {
-        console.log('user_id is ', val);
-        this.stored_data['id_usuario'] = val;
-      });
+      this.storage.get('user_info').then((val_user) => {
 
-      this.storage.get('nome').then((val) => {
-        console.log('user name is ', val);
-        this.stored_data['nome'] = val;
+        this.storage.get('devolution_info').then((val_devolution) => {
+
+          this.storage.get('services_info').then((val_services) => {
+
+            this.stored_data['user'] = val_user;
+            this.stored_data['devolutions'] = val_devolution;
+            this.stored_data['services'] = val_services;
+            this.stored_data['current_service'] = val_services[0]['servico'];
+            this.stored_data['current_wallet'] = val_services[0]['carteira'];
+          });
+        });
       })
     }
 
