@@ -18,6 +18,8 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
 from carteira.models import Carteira 
+from pagamento.models import Pagamento
+from credito.models import Credito 
 
 from uuid import uuid4
 
@@ -50,13 +52,52 @@ class ServicoViewSet(viewsets.ModelViewSet):
 
         create_data = request.data
 
-        id_servico = str(create_data['id_usuario']) + str(datetime.datetime.now().timestamp())
+        id_servico = str(create_data['id_usuario']) + str(int(datetime.datetime.now().timestamp()))
         id_usuario = str(create_data['id_usuario'])
         area_atuacao = str(create_data['area_atuacao'])
         nome_servico = str(create_data['nome_servico'])
 
-        novo_servico = Servico(id_servico, id_usuario, area_atuacao, nome_servico)
+        novo_servico = Servico(area_atuacao, nome_servico, id_usuario, id_servico)
         novo_servico.clean()
         novo_servico.save()
 
         return(Response({"flag":"service_created", "data":ServicoSerializer(novo_servico).data}))
+
+    def destroy(self, request, pk = None):
+
+        if pk is None or len(pk) < 1:
+            return(HttpResponseNotFound("notfound"))
+        
+        instance = self.aux_destroy(pk)
+        return(Response({"flag":"destroyed", "data":instance}))
+
+    def aux_destroy(pk):
+
+        pagamento_comprador = Pagamento.objects.filter(id_pagador = pk)
+        pagamento_vendedor = Pagamento.objects.filter(id_receptor = pk)
+        creditos = Credito.objects.filter(servico_id = pk)
+        carteiras = Carteira.objects.filter(id_servico = pk)
+
+        print("ok begins")
+
+        for compra in pagamento_comprador:
+            compra.destroy()
+            
+        for venda in pagamento_vendedor:
+            venda.destroy()
+            
+        for credito in creditos:
+            credito.destroy()
+            
+        for carteira in carteiras:
+            carteira.destroy()
+
+        print("ateh aqui chega " + str(pk))
+            
+        instance = Servico.objects.get(id_servico = pk)
+
+        print(instance)
+        instance.delete()
+
+        return ServicoSerializer(instance).data
+

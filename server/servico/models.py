@@ -1,3 +1,4 @@
+
 from django.db import models
 from uuid import uuid4
 
@@ -11,5 +12,5 @@ class Servico(models.Model):
 
     area_atuacao = models.CharField(max_length = 20)
     nome_servico = models.CharField(max_length = 30)
-    id_usuario = models.CharField(max_length = 150)
+    id_usuario = models.CharField(max_length = 15)
     id_servico = models.CharField(primary_key=True, default = str(uuid4()).replace('-',''), editable=False, max_length = 150)

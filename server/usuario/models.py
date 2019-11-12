@@ -27,4 +27,3 @@ class Usuario(models.Model):
     # profile information
 
     creation_date = models.DateTimeField(default = now, blank = True, editable = False)
-    

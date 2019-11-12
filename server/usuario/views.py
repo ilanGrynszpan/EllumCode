@@ -6,8 +6,12 @@ from .serializers import UsuarioSerializer
 from carteira.models import Carteira
 from carteira.serializers import CarteiraSerializer
 
+from conta.models import Conta
+from conta.serializers import ContaSerializer
+
 from servico.models import Servico
 from servico.serializers import ServicoSerializer
+from servico.views import ServicoViewSet
 
 from devolucao.models import Devolucao
 from devolucao.serializers import DevolucaoSerializer
@@ -40,6 +44,34 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         selected_user = Usuario.objects.get(id_usuario = pk)
         serializer = UsuarioSerializer(selected_user)
         return Response(serializer.data)
+    
+    def destroy(self, request, pk = None):
+
+        if pk is None or len(pk) < 1:
+            return(HttpResponseNotFound("notfound"))
+        
+        devolucoes = Devolucao.objects.filter(id_usuario = pk)
+        contas = Conta.objects.filter(id_usuario = pk)
+        servicos = Servico.objects.filter(id_usuario = pk)
+
+        print("eh ate aqui")
+
+        for dev in devolucoes:
+            dev.destroy()
+        
+        for conta in contas:
+            conta.destroy()
+        
+        for servico in servicos:
+            print("gets 1")
+            serv_pk = ServicoSerializer(servico).data['id_servico']
+            print("gets here mate")
+            ServicoViewSet.aux_destroy(serv_pk)
+        
+        instance = Usuario.objects.get(id_usuario = pk)
+        instance.delete()
+
+        return(Response({"flag":"destroyed", "data":UsuarioSerializer(instance).data}))
 
     def create(self, request):
 

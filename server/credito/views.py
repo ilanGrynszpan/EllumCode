@@ -13,6 +13,7 @@ from carteira.serializers import CarteiraSerializer
 from devolucao.models import Devolucao
 from devolucao.serializers import DevolucaoSerializer
 from rest_framework import viewsets
+from rest_framework.decorators import action
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -54,12 +55,13 @@ class CreditoViewSet(viewsets.ModelViewSet):
         novo_credito_cadastrado.clean()
         novo_credito_cadastrado.save()
 
-        self.validar_credito(credit_id)
+        #self.validar_credito(credit_id)
 
         return Response('ok')
 
     # metodo auxiliar
 
+    @action(detail = True, methods = ['get','post'])
     def validar_credito(self, pk = None):
 
         if len(pk) < 1:
