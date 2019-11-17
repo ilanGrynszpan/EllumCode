@@ -19,7 +19,7 @@ export class RestUrlsService {
       pagamento: (this.base_url + "pagamento/pagamentos/"),
       devolucao: (this.base_url + "devolucao/devolucoes/"),
       conta: (this.base_url + "contas/"),
-      credito: (this.base_url + "credito/credits/"),
+      credito: (this.base_url + "creditos/credits/"),
 
   };
   

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Storage } from '@ionic/storage';
+import { NgZone } from "@angular/core";
 
 @Component({
   selector: 'app-tab1',
@@ -22,7 +23,8 @@ export class Tab1Page {
   };
 
   constructor(private router: Router,
-    private storage: Storage) {}
+    private storage: Storage,
+    private zone: NgZone) {}
 
     ngOnInit(){
       this.storage.get('user_info').then((val_user) => {
@@ -60,11 +62,19 @@ export class Tab1Page {
       })
     }
   
+    refresh() {
+      this.zone.run(() => {
+        console.log('force update the screen');
+      });
+    }
+
   onServiceSelected(value) {
 
     this.stored_data.current_service = this.stored_data.services[value]['servico'];
     this.stored_data.current_Wallet = this.stored_data.services[value]['carteira'];
 
+    console.log(this.stored_data.services[value]['carteira']);
+    this.refresh();
   }
 
   goToNovoCredito(){

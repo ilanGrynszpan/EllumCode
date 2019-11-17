@@ -15,46 +15,14 @@
 
     </ion-row>
 
-    <ion-row>
+    <ion-searchbar [(ngModel)]="cpf" (ionChange)="searchChanged($event)"></ion-searchbar> 
 
-        <ion-col class="ellum-text" size="12">
-          <ion-label class="content-text">
-  
-            Usuário, confira seus pagamentos!
-          </ion-label>
-        </ion-col>
-      </ion-row>
+    <ion-list>
 
-      <ion-row>
-          <ion-col class="ellum-card">
-            <ion-card class="content-card">
-              <ion-card-header>
-                <ion-card-title class="content-pagamento-header-registro">Registro</ion-card-title>
-              </ion-card-header>
-    
-              <ion-card-content>
-                  <ion-grid>
-                      <ion-row>
-                          <ion-col size="12" class="content-card-cap">
-                            R$ 694,92
-                          </ion-col>
-                      </ion-row>
-                      <ion-row>
-                          <ion-col size="12" class="content-card-noncap">
-                            para atacado XYZ
-                          </ion-col>
-                      </ion-row>
-                      <ion-row>
-                          <ion-col size="12" class="content-card-button">
-                              <ion-button class="bottom-button">Pagar</ion-button>
-                          </ion-col>
-                      </ion-row>
-                    </ion-grid>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-
+      <ion-item *ngFor="let item of results">
+        <ion-label>{{item.nome_servico}}</ion-label>
+      </ion-item>
+    </ion-list>
         <ion-row>
             <ion-col class="ellum-picks">
               <ion-grid class="bottom-button-grid">

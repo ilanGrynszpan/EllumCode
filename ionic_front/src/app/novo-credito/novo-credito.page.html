@@ -31,10 +31,9 @@
 
             <ion-list>
                <ion-item>
-                <ion-label>Serviço</ion-label>
-                <ion-select placeholder="">
-                  <ion-select-option value="f">Serviço 1</ion-select-option>
-                  <ion-select-option value="m">Serviço 2</ion-select-option>
+                <ion-label>{{this.current_service_name}}</ion-label>
+                <ion-select #C placeholder="" (ionChange)="onServiceSelected(C.value)">
+                  <ion-select-option *ngFor="let item of service_names">{{ item }}</ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-list>
