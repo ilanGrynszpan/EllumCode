@@ -15,7 +15,8 @@ export class Tab1Page {
 
     user:'',
     devolutions:[],
-    services:[],
+    services:{},
+    service_names:[],
     current_service:{},
     current_wallet:{}
   };
@@ -32,13 +33,39 @@ export class Tab1Page {
 
             this.stored_data['user'] = val_user;
             this.stored_data['devolutions'] = val_devolution;
-            this.stored_data['services'] = val_services;
             this.stored_data['current_service'] = val_services[this.current_service_index]['servico'];
             this.stored_data['current_wallet'] = val_services[this.current_service_index]['carteira'];
+
+            for(let i = 0; i < val_services.length; i++){
+              
+              let cur_service = val_services[i]; 
+              let serv_info = cur_service['servico'];
+              let wallet_info = cur_service['carteira'];
+
+              console.log(serv_info['nome_servico']);
+
+              this.stored_data.service_names.push(serv_info['nome_servico']);
+
+              this.stored_data.services[serv_info['nome_servico']] = {};
+              this.stored_data.services[serv_info['nome_servico']]['servico'] = serv_info;
+              this.stored_data.services[serv_info['nome_servico']]['carteira'] = wallet_info;
+              //this.stored_data.services[serv_info['nome_servico']]['servico'] = serv_info;
+              //this.stored_data.services[val_services[i]['servico']['nome_servico']]['carteira'] = val_services[i]['carteira']
+            }
+
+            console.log(this.stored_data);
+            console.log(this.stored_data.current_service);
           });
         });
       })
     }
+  
+  onServiceSelected(value) {
+
+    this.stored_data.current_service = this.stored_data.services[value]['servico'];
+    this.stored_data.current_Wallet = this.stored_data.services[value]['carteira'];
+
+  }
 
   goToNovoCredito(){
     this.router.navigate(['/novo-credito'])

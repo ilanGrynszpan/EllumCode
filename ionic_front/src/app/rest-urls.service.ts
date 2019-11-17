@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RestUrlsService {
 
-  public base_url = "http://127.0.0.1:8000/";
+  public base_url = "https://ellumrest.herokuapp.com/";
 
   public rest_urls: any = {
 
