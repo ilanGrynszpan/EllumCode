@@ -46,7 +46,7 @@ class CreditoViewSet(viewsets.ModelViewSet):
 
         create_data = request.data
         
-        credit_id = str(create_data['servico_id']) + str(datetime.datetime.now().timestamp())
+        credit_id = str(create_data['servico_id']) + str(int(datetime.datetime.now().timestamp()))
         service_id = str(create_data['servico_id'])
         user_id = str(create_data['user_id'])
         valor = float(create_data['valor'])
@@ -62,7 +62,7 @@ class CreditoViewSet(viewsets.ModelViewSet):
     # metodo auxiliar
 
     @action(detail = True, methods = ['get','post'])
-    def validar_credito(self, pk = None):
+    def validar_credito(self, request, pk = None):
 
         if len(pk) < 1:
             return Response("entry_error")
@@ -94,3 +94,5 @@ class CreditoViewSet(viewsets.ModelViewSet):
         cadastro_devolucao = Devolucao(devolucao_id, user_id, valor_dev, data_vencimento)
         cadastro_devolucao.clean()
         cadastro_devolucao.save()
+
+        return Response({'flag':'validacao_bem_sucedida', 'data':{'credito':serializer.data, 'devolucao':DevolucaoSerializer(cadastro_devolucao).data}})

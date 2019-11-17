@@ -14,23 +14,33 @@
       </ion-col>
 
     </ion-row>
-
+<ion-row>
     <ion-searchbar [(ngModel)]="cpf" (ionChange)="searchChanged($event)"></ion-searchbar> 
-
+  </ion-row><ion-row>
     <ion-list>
 
       <ion-item *ngFor="let item of results">
-        <ion-label>{{item.nome_servico}}</ion-label>
+        <ion-label class="ion-text-wrap">
+          <h3>{{item.nome_servico}}</h3>
+          {{this.nome}}
+          {{this.celular}}
+        </ion-label>
       </ion-item>
     </ion-list>
+  </ion-row>
         <ion-row>
             <ion-col class="ellum-picks">
               <ion-grid class="bottom-button-grid">
                 <ion-row>
                   <ion-col size="12" class="content-bottom-button">
-                    <ion-button class="bottom-button">Processar Novo Pagamento</ion-button>
+                    <ion-button class="bottom-button">Emitir Pagamento</ion-button>
                   </ion-col>
                 </ion-row>
+                <ion-row>
+                    <ion-col size="12" class="content-bottom-button">
+                      <ion-button class="bottom-button">Realizar pagamento</ion-button>
+                    </ion-col>
+                  </ion-row>
                 <ion-row>
                   <ion-col size="12" class="content-bottom-button">
                     

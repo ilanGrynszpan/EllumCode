@@ -10,7 +10,9 @@ import { PaymentServiceService } from '../payment-service.service';
 export class Tab2Page {
 
   results: [];
-  cpf: string = '';
+  nome = "";
+  celular = "";
+  cpf = "";
 
   constructor(private payment_service:PaymentServiceService) {}
 
@@ -20,19 +22,24 @@ export class Tab2Page {
     this.payment_service.fetch_cpf(this.cpf).subscribe(
       (data) => {
 
-        if(data == "wrong_entry") {
+        if(data['user_id'] == "wrong_entry") {
 
           console.log("wrong_entry");
+          this.results = []
         }
 
-        else if(data == "cpf_not_found") {
+        else if(data['user_id'] == "cpf_not_found") {
 
           console.log("cpf_not_found");
+          this.results = []
         }
 
         else {
 
-          this.payment_service.fetch_services(data).subscribe(
+          this.nome = data['nome'];
+          this.celular = data['celular'];
+
+          this.payment_service.fetch_services(data['user_id']).subscribe(
 
             (data_services) => {
 

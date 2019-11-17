@@ -15,7 +15,7 @@ export class PaymentServiceService {
   fetch_cpf(cpf:any):Observable<any> { // based on code found in https://ionicacademy.com/ionic-4-app-api-calls/
 
     return this.http.get(this.rest_urls.rest_urls.usuario + "get_user_id/?cpf=" + cpf).pipe(
-      map(res=>res['user_id'])
+      map(res=>res)
     );
   }
   

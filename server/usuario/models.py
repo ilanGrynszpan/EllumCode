@@ -13,8 +13,8 @@ class Usuario(models.Model):
 
     id_usuario = models.CharField(primary_key=True, max_length = 150, default = str(uuid4()).replace('-', ''), editable=False)
     nome = models.CharField(max_length = 50)
-    cpf = models.CharField(max_length = 14)
-    celular = models.CharField(max_length = 9)
+    cpf = models.CharField(max_length = 11)
+    celular = models.CharField(max_length = 11)
     senha = models.CharField(max_length = 15)
     is_logged = models.BooleanField(default = False)
 

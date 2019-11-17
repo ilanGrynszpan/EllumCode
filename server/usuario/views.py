@@ -18,7 +18,7 @@ from devolucao.serializers import DevolucaoSerializer
 
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -110,7 +110,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         user_get_data = UsuarioSerializer(user_get[0])
 
         #return Response(user_get_data.data)
-
+        
         first_service = Servico(id_usuario = user_get_data.data['id_usuario'],\
         area_atuacao = 'master',\
         nome_servico = 'service_master_name3558')
@@ -119,7 +119,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         first_service.save()
 
         service_data = ServicoSerializer(first_service)
-
+        
         #return Response(service_data.data)
 
         user_wallet = Carteira(id_usuario = user_get_data.data['id_usuario'],\
@@ -131,6 +131,26 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
         wallet_get_data = CarteiraSerializer(user_wallet)
         return Response([user_get_data.data, service_data.data, wallet_get_data.data])
+
+    @action(detail = False, methods = ['get'])
+    def get_user_id(self, request):
+
+        cpf = self.request.query_params['cpf']
+
+        if cpf is None or len(cpf) < 1:
+            return Response({"user_id":"wrong_entry"})
+
+        
+        print("cpf = " + str(cpf))
+        user_get = Usuario.objects.filter(cpf = str(cpf))
+        print(user_get)
+        if len(user_get) < 1:
+            return Response({"user_id":"cpf_not_found"})
+
+        user_id = (UsuarioSerializer(user_get[0]).data)['id_usuario']
+        user_name = (UsuarioSerializer(user_get[0]).data)['nome']
+        user_cell = (UsuarioSerializer(user_get[0]).data)['celular']
+        return Response({"user_id":user_id, "nome":user_name, "celular":user_cell})
 
 
     @action(detail = True, methods = ['get','post'])
@@ -147,7 +167,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         devolution_data = Devolucao.objects.filter(id_usuario = pk)
         devolution_series = []
 
-        for devolution in devolution_series:
+        for devolution in devolution_data:
             devolution_serialized = DevolucaoSerializer(devolution)
             devolution_series.append(devolution_serialized.data)
         
@@ -155,8 +175,10 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
             service_serialized = ServicoSerializer(service)
             service_wallet = Carteira.objects.filter(id_servico = service_serialized.data["id_servico"])
-            service_wallet_serialized = CarteiraSerializer(service_wallet[0])
-            user_services.append({"servico":service_serialized.data, "carteira":service_wallet_serialized.data})
+
+            if len(service_wallet) > 0:
+                service_wallet_serialized = CarteiraSerializer(service_wallet[0])
+                user_services.append({"servico":service_serialized.data, "carteira":service_wallet_serialized.data})
 
         return Response({"usuario":user_serialized.data, "devolucoes":devolution_series, "servicos":user_services})
     

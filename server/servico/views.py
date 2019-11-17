@@ -15,11 +15,14 @@ import datetime
 from datetime import timedelta
 from django.utils import timezone
 
+from rest_framework.decorators import action
 from django.views.decorators.csrf import csrf_exempt
 
 from carteira.models import Carteira 
 from pagamento.models import Pagamento
 from credito.models import Credito 
+
+from carteira.serializers import CarteiraSerializer
 
 from uuid import uuid4
 
@@ -61,7 +64,14 @@ class ServicoViewSet(viewsets.ModelViewSet):
         novo_servico.clean()
         novo_servico.save()
 
-        return(Response({"flag":"service_created", "data":ServicoSerializer(novo_servico).data}))
+        service_wallet = Carteira(id_usuario = id_usuario,\
+        id_servico = id_servico,\
+        credito = 0.00)
+
+        service_wallet.clean()
+        service_wallet.save()
+
+        return(Response({"flag":"service_created", "service_data":ServicoSerializer(novo_servico).data, "service_wallet":CarteiraSerializer(service_wallet).data}))
 
     def destroy(self, request, pk = None):
 
@@ -101,3 +111,21 @@ class ServicoViewSet(viewsets.ModelViewSet):
 
         return ServicoSerializer(instance).data
 
+    @action(detail = False, methods = ['get'])
+    def get_service_list(self, request):
+
+        user_id = self.request.query_params['user_id']
+
+        if user_id is None or len(user_id) < 1:
+            return Response({"user_id":"wrong_entry"})
+
+        services_get = Servico.objects.filter(id_usuario = str(user_id))
+
+        if len(services_get) < 1:
+            return Response({"service_list":"user_not_found"})
+
+        service_list = []
+        for service in services_get:
+            service_list.append(ServicoSerializer(service).data)
+
+        return Response({"service_list": service_list})

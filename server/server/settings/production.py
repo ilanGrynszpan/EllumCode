@@ -13,6 +13,8 @@ import dj_database_url
 
 DEBUG = True
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 

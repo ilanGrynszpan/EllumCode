@@ -27,7 +27,7 @@ config.read(BASE_DIR + "/settings/config.ini")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "g/%/!=utfS#^|iE"
 
-ALLOWED_HOSTS = ['https://ellumrest.herokuapp.com/', 'http://0.0.0.0:5000/', 'http://127.0.0.1/', 'http://localhost:5000/', 'http://localhost:8000/']
+ALLOWED_HOSTS = ['https://ellumrest.herokuapp.com/', 'http://0.0.0.0:5000/', 'http://127.0.0.1/', 'localhost']
 
 
 # Application definition
