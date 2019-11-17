@@ -26,4 +26,11 @@ export class PaymentServiceService {
       map(res=>res['service_list'])
     );
   }
+
+  fetch_my_payments(service_id:any):Observable<any> {
+
+    return this.http.get(this.rest_urls.rest_urls.pagamento + "get_pending_payments_for_service/?id_servico=" + service_id).pipe(
+      map(res=>res['payment_list'])
+    );
+  }
 }
