@@ -16,7 +16,7 @@
     <ion-row class="service-type-choice-row">
 
       <ion-select placeholder="" [(ngModel)]="this.new_service_data.area_atuacao">
-        <ion-select-option *ngFor="let item of tipos_servico">{{ item }}</ion-select-option>
+        <ion-select-option *ngFor="let item of tipos_servico" (click)="new_service_data.area_atuacao = item;">{{ item }}</ion-select-option>
       </ion-select>
     </ion-row>
     <ion-row class="service-name-input-row">

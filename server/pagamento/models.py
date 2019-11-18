@@ -15,4 +15,4 @@ class Pagamento(models.Model):
     id_receptor = models.CharField(max_length=150, default = "")
     valor = models.DecimalField(max_digits = 10, decimal_places = 2, default = 0.00)
     situacao = models.CharField(editable = True, max_length = 20)
-    token = models.CharField(max_length = 4, default = "xxxx")
+    #token = models.CharField(max_length = 4, default = "xxxx")

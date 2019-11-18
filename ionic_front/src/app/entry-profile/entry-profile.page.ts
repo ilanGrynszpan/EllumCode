@@ -84,7 +84,7 @@ export class EntryProfilePage implements OnInit {
           return;
         }
 
-        this.storage.set('id_usuario', data[0]['id_usuario']).then(
+        this.storage.set('id_usuario', data['id_usuario']).then(
 
           (val) => {
 

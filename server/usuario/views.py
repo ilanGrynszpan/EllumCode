@@ -109,28 +109,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         user_get = Usuario.objects.filter(cpf = create_data['cpf'])
         user_get_data = UsuarioSerializer(user_get[0])
 
-        #return Response(user_get_data.data)
-        
-        first_service = Servico(id_usuario = user_get_data.data['id_usuario'],\
-        area_atuacao = 'master',\
-        nome_servico = 'service_master_name3558')
-
-        first_service.clean()
-        first_service.save()
-
-        service_data = ServicoSerializer(first_service)
-        
-        #return Response(service_data.data)
-
-        user_wallet = Carteira(id_usuario = user_get_data.data['id_usuario'],\
-        id_servico = service_data.data['id_servico'],\
-        credito = 0.00)
-
-        user_wallet.clean()
-        user_wallet.save()
-
-        wallet_get_data = CarteiraSerializer(user_wallet)
-        return Response([user_get_data.data, service_data.data, wallet_get_data.data])
+        return Response(user_get_data.data)
 
     @action(detail = False, methods = ['get'])
     def get_user_id(self, request):
