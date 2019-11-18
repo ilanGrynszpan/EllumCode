@@ -19,7 +19,6 @@ export class PaymentServiceService {
     );
   }
   
-
   fetch_services(user_id:any):Observable<any> {
 
     return this.http.get(this.rest_urls.rest_urls.servico + "get_service_list/?user_id=" + user_id).pipe(
@@ -31,6 +30,20 @@ export class PaymentServiceService {
 
     return this.http.get(this.rest_urls.rest_urls.pagamento + "get_pending_payments_for_service/?id_servico=" + service_id).pipe(
       map(res=>res['payment_list'])
+    );
+  }
+
+  auth_payment(payment_id:any):Observable<any> {
+
+    return this.http.get(this.rest_urls.rest_urls.pagamento + payment_id + "/auth_payment/").pipe(
+      map(res=>res)
+    );
+  }
+
+  create_payment(payment_data:any):Observable<any> {
+
+    return this.http.post(this.rest_urls.rest_urls.pagamento, payment_data).pipe(
+      map(res=>res)
     );
   }
 }
