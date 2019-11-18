@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { RestUrlsService } from '../rest-urls.service';
-import { NavController } from 'ionic-angular';
+
 
 // needs installation of npm install ionic-angular@latest --save
 
@@ -44,7 +44,8 @@ export class Tab3Page {
   new_service = {
 
     area_atuacao:"",
-    nome_servico:""
+    nome_servico:"",
+    id_usuario:""
   }
 
   current_service = 0;
@@ -53,7 +54,6 @@ export class Tab3Page {
   constructor(private router: Router,
     private storage: Storage,
     private http: HttpClient, 
-    private navCtrl: NavController,
     private rest_urls: RestUrlsService) {}
   
   ngOnInit() {
@@ -63,9 +63,11 @@ export class Tab3Page {
       this.storage.get('services_info').then((val_services) => {
 
         this.stored_data.services = val_services;
-        this.stored_data.user = val_user.id_usuario;
-        this.stored_data.user_id = val_user.nome;
+        this.stored_data.user_id = val_user.id_usuario;
+        this.stored_data.user = val_user.nome;
         this.number_of_services = val_services.length;
+
+        this.new_service.id_usuario = val_user.id_usuario;
       })
     });
   }
@@ -82,7 +84,7 @@ export class Tab3Page {
       (data) => {
 
         console.log(data);
-        this.navCtrl.setRoot(this.navCtrl.getActive().component);
+        //this.navCtrl.setRoot(this.navCtrl.getActive().component);
       }
     );
   }
