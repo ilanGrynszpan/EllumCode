@@ -32,7 +32,7 @@
             <ion-list>
                <ion-item>
                 <ion-label>{{this.current_service_name}}</ion-label>
-                <ion-select #C placeholder="" (ionChange)="onServiceSelected(C.value)">
+                <ion-select #C placeholder="" (ionChange)="onServiceSelected(C.value)" placeholder = "Serviço a ser financiado">
                   <ion-select-option *ngFor="let item of service_names">{{ item }}</ion-select-option>
                 </ion-select>
               </ion-item>

@@ -27,6 +27,9 @@ export class Tab1Page {
     private zone: NgZone) {}
 
     ngOnInit(){
+    }
+
+    ionViewWillEnter(){
       this.storage.get('user_info').then((val_user) => {
 
         this.storage.get('devolution_info').then((val_devolution) => {
@@ -48,6 +51,9 @@ export class Tab1Page {
 
               this.stored_data.service_names.push(serv_info['nome_servico']);
 
+              if(this.stored_data.service_names.indexOf(serv_info['nome_servico']) == -1) {
+                this.stored_data.service_names.push(serv_info['nome_servico']);
+              }
               this.stored_data.services[serv_info['nome_servico']] = {};
               this.stored_data.services[serv_info['nome_servico']]['servico'] = serv_info;
               this.stored_data.services[serv_info['nome_servico']]['carteira'] = wallet_info;

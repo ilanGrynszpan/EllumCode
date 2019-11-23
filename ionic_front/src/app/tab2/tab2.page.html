@@ -6,8 +6,8 @@
 
 <ion-content>
 
-  <ion-grid>
-    <ion-row>
+  <ion-grid class="elements-grid">
+    <ion-row class="page-title">
       <ion-col class="ellum-top" size="12">
         <ion-label class="content-main">ellum</ion-label>
 
@@ -15,13 +15,16 @@
 
     </ion-row>
     <ion-row>
-      <ion-searchbar [(ngModel)]="cpf" (ionChange)="searchChanged($event)"></ion-searchbar>
+      <ion-searchbar [(ngModel)]="cpf" (ionChange)="searchChanged($event)" placeholder="CPF do seu cliente (só números)"></ion-searchbar>
+    </ion-row>
+    <ion-row>
+      <ion-label>Digite abaixo o valor de pagamento</ion-label>
     </ion-row>
     <ion-row>
         <ion-input [(ngModel)]="valor"></ion-input>
       </ion-row>
     <ion-row>
-        <ion-select placeholder="" (ionChange)="onChangeCurrentService($event)">
+        <ion-select placeholder="Escolha o seu serviço para receber" (ionChange)="onChangeCurrentService($event)">
             <ion-select-option *ngFor="let item of services; let i = index">{{ item.nome_servico }}</ion-select-option>
           </ion-select>
     </ion-row>

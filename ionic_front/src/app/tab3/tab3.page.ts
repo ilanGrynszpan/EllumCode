@@ -72,9 +72,16 @@ export class Tab3Page {
     });
   }
 
-  deletarServico(servico) {
+  deletarServico(service_data) {
 
+    this.http.delete(this.rest_urls.rest_urls['servico'] + service_data.servico.id_servico).subscribe(
 
+      (data) => {
+
+        console.log(data);
+        //this.navCtrl.setRoot(this.navCtrl.getActive().component);
+      }
+    );
   }
 
   cadastrarServico(){
