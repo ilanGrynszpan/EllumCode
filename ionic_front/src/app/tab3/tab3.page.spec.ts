@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 import { Tab3Page } from './tab3.page';
 

@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 
 import { RestUrlsService } from '../rest-urls.service';
+import { AccountLoginService } from "../account-login.service"; 
 
 @Component({
   selector: 'app-login-basic',
@@ -21,6 +22,7 @@ export class LoginBasicPage implements OnInit {
   constructor(private router: Router, 
     private http: HttpClient, 
     private rest_urls: RestUrlsService,
+    private login_maker: AccountLoginService,
     private storage: Storage) { }
 
   ngOnInit() {
@@ -34,7 +36,9 @@ export class LoginBasicPage implements OnInit {
       return;
     }
 
-    this.http.post(this.rest_urls.rest_urls['usuario'] + '123/auth_user/', this.data_pckg).subscribe(
+    console.log(this.login_maker.log_in_cpf(this.data_pckg.cpf));
+
+    /*this.http.post(this.rest_urls.rest_urls['usuario'] + '123/auth_user/', this.data_pckg).subscribe(
 
       (data) => {
 
@@ -80,7 +84,7 @@ export class LoginBasicPage implements OnInit {
           console.log(error);
         }
       );
-      });
+      });*/
   }
 
   goBack(){

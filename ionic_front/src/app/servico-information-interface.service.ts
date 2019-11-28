@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { Router } from '@angular/router';
-import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 
 import { RestUrlsService } from './rest-urls.service';
@@ -13,9 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class ServicoInformationInterfaceService {
 
-  constructor(private router: Router, 
-    private http: HttpClient,
-    private storage: Storage,
+  constructor(private http: HttpClient,
     private rest_urls: RestUrlsService) { }
 
   servico_retrieve(servico_id:any):Observable<any> {

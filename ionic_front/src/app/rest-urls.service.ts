@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
@@ -8,6 +7,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RestUrlsService {
+
+  private http: HttpClient;
+  private storage: Storage;
 
   public base_url = "https://ellumrest.herokuapp.com/";
 
@@ -23,9 +25,7 @@ export class RestUrlsService {
 
   };
   
-  constructor(private router: Router, 
-    private http: HttpClient,
-    private storage: Storage) { }
+  constructor() { }
 
   public getUserInformation(user_id:String) : any {
 
