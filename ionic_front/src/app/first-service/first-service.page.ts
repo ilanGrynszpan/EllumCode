@@ -34,7 +34,7 @@ export class FirstServicePage implements OnInit {
 
   ngOnInit() {
 
-    this.storage.get('id_usuario').then(
+    this.storage.get('user_id').then(
 
       (val) => {
 
@@ -59,7 +59,6 @@ export class FirstServicePage implements OnInit {
       (data) => {
 
         console.log(data);
-        this.rest_urls.getUserInformation(this.new_service_data.id_usuario);
         this.router.navigate(['/tabs/tab1']);
       }
     );

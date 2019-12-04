@@ -26,3 +26,57 @@ ion-button.bottom-button.md.button.button-solid.ion-activatable.ion-focusable.hy
     /* text-align: center; */
     width: 100%;
 }
+
+.cpf-input-div {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 10%;
+}
+
+.paying-services-list {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 10%;
+  /* border-color: #235594; */
+}
+
+ion-item.item-service-payer.item-label.item.md.in-list.ion-focusable.hydrated {
+  border-style: solid;
+  border-color: #235594;
+  /* background-color: #235594; */
+  color: #235594;
+  /* font-family: monospace; */
+}
+
+ion-label.service-item.sc-ion-label-md-h.sc-ion-label-md-s.md.hydrated {
+  font-family: monospace;
+  font-weight: 900;
+}
+
+.payment-val {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 2.5%;
+  color: #235594;
+  font-family: monospace;
+  font-weight: 900;
+}
+
+.payment-val-input {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 3%;
+  color: #235594;
+  font-family: monospace;
+  font-weight: 900;
+}
+
+.service-input-area {
+
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 3%;
+  color: #235594;
+  font-family: monospace;
+  font-weight: 900;
+}

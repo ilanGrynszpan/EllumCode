@@ -10,3 +10,32 @@ ion-button.entry-button.md.button.button-block.button-outline.ion-activatable.io
 ion-button.signin-button.md.button.button-block.button-outline.ion-activatable.ion-focusable.hydrated {
     margin-bottom: 10%;
 }
+
+ion-button.personal-btn.button.button-outline.ion-activatable.ion-focusable.hydrated {
+    width: 80%;
+    margin-left: 10%;
+}
+
+
+ion-button.button.ion-activatable.ion-focusable.hydrated {
+    width: 80%;
+    margin-left: 10%;
+    background: #235594;
+    color: #F0F0F0;
+    font-family: monospace;
+    border-radius: 2px;
+}
+
+ion-button.personal-btn.signin-button.md.button.button-clear.ion-activatable.ion-focusable.hydrated {
+    margin-top: -70%;
+}
+
+ion-button.personal-btn.entry-button.md.button.button-clear.ion-activatable.ion-focusable.hydrated {
+    margin-top: -50%;
+}
+
+ion-card.content-card.sc-ion-card-md-h.sc-ion-card-md-s.md.hydrated {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10%;
+}

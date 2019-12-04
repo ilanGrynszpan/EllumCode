@@ -10,7 +10,6 @@ const routes: Routes = [
   { path: 'novo-credito', loadChildren: './novo-credito/novo-credito.module#NovoCreditoPageModule' },
   { path: 'fatura', loadChildren: './fatura/fatura.module#FaturaPageModule' },
   { path: 'pedidos-pendentes', loadChildren: './pedidos-pendentes/pedidos-pendentes.module#PedidosPendentesPageModule' },
-  { path: 'editar-servicos', loadChildren: './editar-servicos/editar-servicos.module#EditarServicosPageModule' },
   { path: 'nolog-entry', loadChildren: './nolog-entry/nolog-entry.module#NologEntryPageModule' },
   { path: 'entry-profile', loadChildren: './entry-profile/entry-profile.module#EntryProfilePageModule' },
   { path: 'entry-bank', loadChildren: './entry-bank/entry-bank.module#EntryBankPageModule' },

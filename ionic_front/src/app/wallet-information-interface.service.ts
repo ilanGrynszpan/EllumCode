@@ -14,10 +14,19 @@ export class WalletInformationInterfaceService {
   constructor(private http: HttpClient,
     private rest_urls: RestUrlsService) { }
 
+  /*
+  
+  Método para coletar dados sobre uma carteira de serviço\
+
+  Parâmetros: id_servico
+  Retorno: JSON com carteira ou flag
+  
+  */
+
   wallet_retrieve(servico_id:any):Observable<any> {
 
     return this.http.get(this.rest_urls.rest_urls.carteira + servico_id + "/").pipe(
-      map(res=>res['response'])
+      map(res=>res)
     );
   }
 }

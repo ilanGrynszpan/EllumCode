@@ -81,8 +81,10 @@ export class Tab2Page implements OnInit {
 
   onChangeCurrentService(index) {
 
-    this.current_service.nome = this.services_dict[index.detail.value].nome_servico;
-    this.current_service.id_servico = this.services_dict[index.detail.value].id_servico;
+    let servico_escolhido = index.detail.value;
+    console.log(servico_escolhido);
+    this.current_service.nome = servico_escolhido.nome_servico;
+    this.current_service.id_servico = servico_escolhido.id_servico;
     console.log(this.current_service);
   }
 

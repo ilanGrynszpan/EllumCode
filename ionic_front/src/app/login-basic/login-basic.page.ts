@@ -7,6 +7,18 @@ import { HttpClient } from '@angular/common/http';
 import { RestUrlsService } from '../rest-urls.service';
 import { AccountLoginService } from "../account-login.service"; 
 
+/*
+
+Página Typescript destinada aos eventos de login na plataforma
+
+Autor: Ilan Grynszpan
+Data: Rio de Janeiro, 02 de Dezembro de 2019
+
+Observações: Esta página cuida somente dos aspectos gráficos de tela, as interações de login com back-end
+             estão no login-service.
+
+*/
+
 @Component({
   selector: 'app-login-basic',
   templateUrl: './login-basic.page.html',
@@ -16,78 +28,60 @@ export class LoginBasicPage implements OnInit {
 
   private data_pckg = {
 
-    cpf: ""
+    cpf: "", // essa variável será utilizada para o envio de dado de CPF ao back-end
+    senha: "" // essa variável será utilizada para o envio de dado de senha ao back-end
   };
 
   constructor(private router: Router, 
     private http: HttpClient, 
     private rest_urls: RestUrlsService,
-    private login_maker: AccountLoginService,
+    private login_maker: AccountLoginService, // utilizada para o ato de login por login-service
     private storage: Storage) { }
 
   ngOnInit() {
   }
 
-  goHome(){
+  /*
+  
+  Método para requisitar ao login-service que realize o login com as informações passadas
 
-    if(this.data_pckg.cpf == '') {
+  Trigger: Clique no botão de Entrar
+  Resultados esperados: Tentativa de login via login-service.
+  Retorno: Nenhum
+  
+  */
+
+  goLogin(){
+
+    if(this.data_pckg.cpf == '') { // não é tentado o login se nenhum CPF ou senha for fornecido
 
       console.log("no entry");
       return;
     }
 
-    console.log(this.login_maker.log_in_cpf(this.data_pckg.cpf));
+    if(this.data_pckg.senha == '') { // não é tentado o login se nenhum CPF ou senha for fornecido
 
-    /*this.http.post(this.rest_urls.rest_urls['usuario'] + '123/auth_user/', this.data_pckg).subscribe(
+      console.log("no entry");
+      return;
+    }
 
-      (data) => {
-
-        if(data == "not_auth_wrong_passcode") {
-
-          console.log("passcode wrong");
-          return;
-        }
-
-        else if(data == "no_passcode_input") {
-
-          console.log("no passcode input");
-          return;
-        }
-
-        console.log(data);
-        //this.storage.set('nome', data['usuario']['nome']);
-        //this.storage.set('cpf', data['usuario']['cpf']);
-        //this.storage.set('celular', data['usuario']['celular']);
-        this.storage.set('id_usuario', data['user_id']).then((val) => {
-
-          this.storage.get('id_usuario').then((val) => {
-
-            console.log(val);
-
-            if(val == data['user_id']) {
-
-              console.log(val);
-              this.rest_urls.getUserInformation(val);
-              this.router.navigate(['/tabs/tab1']);
-            }
-
-            else {
-
-              console.log("wrong");
-            }
-          });
-
-        },
-
-        (error) => {
-
-          console.log(error);
-        }
-      );
-      });*/
+    console.log(this.login_maker.log_in_cpf(this.data_pckg.cpf, this.data_pckg.senha)); /* envia evento de login so back-end,
+                                                                    com mostra de resultado no console*/
+                                                                    
   }
 
+  /*
+  
+  Método para retornar à página inicial da plataforma
+
+  Trigger: Clique no botão de voltar
+  Resultados esperados: retorno à página inicial
+  Retorno: Nenhum
+  
+  */
+
   goBack(){
+
     this.router.navigate(['/nolog-entry']);
   }
 

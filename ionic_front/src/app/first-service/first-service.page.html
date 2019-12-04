@@ -1,3 +1,11 @@
+<!--
+  Página de preenchimento do primeiro serviço do usuário durante seu cadastro
+
+  Autor: Ilan Grynszpan
+  Data: Rio de Janeiro, 02 de Dezembro de 2019
+  
+-->
+
 <ion-header>
   <ion-toolbar>
     <ion-title>first-service</ion-title>
@@ -6,27 +14,24 @@
 
 <ion-content>
 
-  <ion-grid>
-    <ion-row class="services-intro-label">
+  <div class="head-1">
+    Na Ellum, seu crédito é associado aos serviços que você presta. Por exemplo,
+    se você trabalha com construção ou for manicure, coloque o nome do seu estabelecimento ou serviços
+    no campo "nome serviço" abaixo e selecione devidamente a área de atuação (construção, beleza, ...).
+  </div>
 
-      Na Ellum, seu crédito é associado aos serviços que você presta. Por exemplo, 
-      se você trabalha com construção ou for manicure, coloque o nome do seu estabelecimento ou serviços
-      no campo "nome serviço" abaixo e selecione devidamente a área de atuação (construção, beleza, ...).
-    </ion-row>
-    <ion-row class="service-type-choice-row">
+  <div class="head-1">
+    <ion-select placeholder="" [(ngModel)]="this.new_service_data.area_atuacao">
+      <ion-select-option *ngFor="let item of tipos_servico" (click)="new_service_data.area_atuacao = item;">{{ item }}
+      </ion-select-option>
+    </ion-select>
+  </div>
 
-      <ion-select placeholder="" [(ngModel)]="this.new_service_data.area_atuacao">
-        <ion-select-option *ngFor="let item of tipos_servico" (click)="new_service_data.area_atuacao = item;">{{ item }}</ion-select-option>
-      </ion-select>
-    </ion-row>
-    <ion-row class="service-name-input-row">
+  <div class="service-choice">
+    <ion-input class="service-name-input" placeholder="Nome serviço" [(ngModel)]="this.new_service_data.nome_servico">
+    </ion-input>
+  </div>
 
-      <ion-input class="service-name-input" placeholder="Nome serviço" [(ngModel)]="this.new_service_data.nome_servico"></ion-input>
-    </ion-row>
+  <ion-button class="service-submit" (click)="this.onSubmit()" fill="clear">ENTRAR</ion-button>
 
-    <ion-row class="service-submit-row">
-
-      <ion-button class="service-submit" (click)="this.onSubmit()">ENTRAR</ion-button>
-    </ion-row>
-  </ion-grid>
 </ion-content>

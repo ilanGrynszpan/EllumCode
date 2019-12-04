@@ -1,12 +1,24 @@
+
+<!-- 
+
+  Página de entrada do aplicativo, a partir dela é possível realizar login ou um novo cadastro.
+
+  Autor: Ilan Grynszpan
+  Data: Rio de Janeiro, 02 de Dezembro de 2019
+  
+--> 
+
 <ion-header>
   <ion-toolbar>
     <ion-title>Ellum</ion-title>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
+    
     <div class = "get-in-button-form">
-      <ion-button expand="block" (click)='this.goCadastro()' class = "signin-button" fill="outline">CADASTRE-SE</ion-button>
-      <ion-button expand="block" (click)='this.goEntry()' class = "entry-button" fill="outline">ENTRAR</ion-button>
+      <ion-button  (click)='this.goCadastro()' class = "personal-btn signin-button" fill="clear">CADASTRE-SE</ion-button>
+      <ion-button  (click)='this.goEntry()' class = "personal-btn entry-button" fill="clear">ENTRAR</ion-button>
     </div>
 </ion-content>

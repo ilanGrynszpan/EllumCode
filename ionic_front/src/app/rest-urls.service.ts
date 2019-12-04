@@ -17,7 +17,7 @@ export class RestUrlsService {
 
       usuario: (this.base_url + "usuarios/usuarios/"),
       servico: (this.base_url + "servicos/servicos/"),
-      carteira: (this.base_url + "carteira/carteiras/"),
+      carteira: (this.base_url + "carteiras/carteiras/"),
       pagamento: (this.base_url + "pagamentos/pagamentos/"),
       devolucao: (this.base_url + "devolucao/devolucoes/"),
       conta: (this.base_url + "contas/"),

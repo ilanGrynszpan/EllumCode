@@ -27,7 +27,7 @@ export class EntryBankPage implements OnInit {
 
   ngOnInit() {
 
-    this.storage.get('id_usuario').then(
+    this.storage.get('user_id').then(
 
       (val) => {
 

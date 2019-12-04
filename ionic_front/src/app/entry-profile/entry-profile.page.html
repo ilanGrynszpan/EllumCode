@@ -6,9 +6,10 @@
 
 <ion-content>
 
+
   <ion-grid>
 
-
+      <div class = "head-1">
     <ion-row>
       <ion-col class="ellum-login" size="12">
         <ion-label class="content-login">Nome completo</ion-label>
@@ -40,20 +41,28 @@
 
     </ion-row>
 
+    </div>
+
+    <div class="head-1">
+
     <ion-row>
       <ion-col class="ellum-login" size="12">
-        <ion-button expand="block" (click)='this.goBank()' class="entry-button" fill="outline">ENVIAR</ion-button>
+        <ion-button  (click)='this.goBank()' class="bottom-button entry-button" fill="clear">ENVIAR</ion-button>
       </ion-col>
 
     </ion-row>
 
     <ion-row>
       <ion-col class="ellum-login" size="12">
-        <ion-button expand="block" (click)='this.goBack()' class="back-button" fill="outline">VOLTAR</ion-button>
+        <ion-button (click)='this.goBack()' class="bottom-button back-button" fill="clear">VOLTAR</ion-button>
       </ion-col>
 
     </ion-row>
+
+  </div>
   </ion-grid>
+
+
 
 
 </ion-content>
