@@ -15,7 +15,7 @@ import { RestUrlsService } from '../rest-urls.service';
 })
 export class EntryProfilePage implements OnInit {
 
-  private new_user:any = {
+  public new_user:any = {
 
     nome:"",
     cpf:"",

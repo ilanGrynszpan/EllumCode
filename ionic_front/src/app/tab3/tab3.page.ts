@@ -27,7 +27,7 @@ export class Tab3Page {
       O campo services será atualizado toda a vez em que um serviço for adicionado ou deletado.
   */
 
-  private stored_data:any = {
+  public stored_data:any = {
 
     user: {
 
@@ -47,7 +47,7 @@ export class Tab3Page {
     ]
   };
 
-  private tipos_servico:any = [ // tipos de serviço disponíveis para cadastro
+  public tipos_servico:any = [ // tipos de serviço disponíveis para cadastro
 
     "construção",
     "beleza",
@@ -133,7 +133,7 @@ export class Tab3Page {
   
   */
 
-  deletarServico(service_data) {
+  deletarServico() {
 
     if(this.stored_data.services.length <= 1) {
 

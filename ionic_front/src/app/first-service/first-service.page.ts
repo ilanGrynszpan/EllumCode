@@ -11,7 +11,7 @@ import { RestUrlsService } from '../rest-urls.service';
 })
 export class FirstServicePage implements OnInit {
 
-  private tipos_servico:any = [
+  public tipos_servico:any = [
 
     "construção",
     "beleza",
@@ -20,7 +20,7 @@ export class FirstServicePage implements OnInit {
     "outro"
   ]
 
-  private new_service_data:any = {
+  public new_service_data:any = {
 
     "area_atuacao":"",
     "nome_servico":"",

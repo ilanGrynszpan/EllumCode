@@ -6,28 +6,28 @@
 
 <ion-content>
 
-  <div class = "head-1">
+  <div class="head-1">
     <ion-label>Cadastro de informações bancárias, se não possuir conta somente deixe em branco.</ion-label>
   </div>
 
-<div class = "head-1">
-            <ion-label class="content-login">Banco</ion-label>
-            <ion-input class="bank-input" [(ngModel)]="this.bank_info.banco"></ion-input>
-            <ion-label class="content-login">Agência</ion-label>
-            <ion-input class="bank-agency-input" [(ngModel)]="this.bank_info.agencia"></ion-input>
- 
-    
-            <ion-label class="content-login">Conta</ion-label>
-            <ion-input class="bank-acc-input" [(ngModel)]="this.bank_info.conta"></ion-input>
+  <div class="head-1">
+    <ion-label class="content-login">Banco</ion-label>
+    <ion-input class="bank-input" [(ngModel)]="this.bank_info.banco"></ion-input>
+    <ion-label class="content-login">Agência</ion-label>
+    <ion-input class="bank-agency-input" [(ngModel)]="this.bank_info.agencia"></ion-input>
 
 
-</div>
-            <ion-button expand="block" (click)='this.setBankingData()' class="entry-button" fill="outline">ENVIAR</ion-button>
-
-              <ion-button expand="block" (click)='this.goSubmit()' class="entry-button" fill="outline">NÃO POSSUO CONTA</ion-button>
+    <ion-label class="content-login">Conta</ion-label>
+    <ion-input class="bank-acc-input" [(ngModel)]="this.bank_info.conta"></ion-input>
 
 
-            <ion-button expand="block" (click)='this.goBack()' class="entry-button" fill="outline">VOLTAR</ion-button>
+  </div>
+  <ion-button expand="block" (click)='this.setBankingData()' class="entry-button" fill="outline">ENVIAR</ion-button>
+
+  <ion-button expand="block" (click)='this.goSubmit()' class="entry-button" fill="outline">NÃO POSSUO CONTA</ion-button>
+
+
+  <ion-button expand="block" (click)='this.goBack()' class="entry-button" fill="outline">VOLTAR</ion-button>
 
 
 </ion-content>

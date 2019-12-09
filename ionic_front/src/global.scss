@@ -1,0 +1,119 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+.get-in-button-form {
+    margin-top: 90%;
+    -webkit-text-stroke: medium;
+}
+
+ion-button.entry-button.md.button.button-block.button-outline.ion-activatable.ion-focusable.hydrated {
+    margin-bottom: 10%;
+}
+
+ion-button.signin-button.md.button.button-block.button-outline.ion-activatable.ion-focusable.hydrated {
+    margin-bottom: 10%;
+}
+
+ion-button.personal-btn.button.button-outline.ion-activatable.ion-focusable.hydrated {
+    width: 80%;
+    margin-left: 10%;
+}
+
+
+ion-button.button.ion-activatable.ion-focusable.hydrated {
+    width: 80%;
+    margin-left: 10%;
+    background: #235594;
+    color: #F0F0F0;
+    font-family: monospace;
+    border-radius: 2px;
+}
+
+ion-button.personal-btn.signin-button.md.button.button-clear.ion-activatable.ion-focusable.hydrated {
+    margin-top: -70%;
+}
+
+ion-button.personal-btn.entry-button.md.button.button-clear.ion-activatable.ion-focusable.hydrated {
+    margin-top: -50%;
+}
+
+ion-card.content-card.sc-ion-card-md-h.sc-ion-card-md-s.md.hydrated {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10%;
+}
+
+ion-label.content-text.sc-ion-label-md-h.sc-ion-label-md-s.md.hydrated {
+    font-family: monospace;
+    font-size: x-large;
+    font-weight: 600;
+    color: #235594;
+  }
+  
+  .head-1 {
+    margin-left: 10%;
+    margin-top: 10%;
+    margin-right: 10%;
+  }
+  
+  
+  ion-button.button.ion-activatable.ion-focusable.hydrated {
+    width: 80%;
+    margin-left: 10%;
+    background: #235594;
+    color: #F0F0F0;
+    font-family: monospace;
+    border-radius: 2px;
+  }
+  
+  ion-img.md.hydrated {
+    width: 40%;
+    /* align-content: center; */
+    margin-left: 30%;
+    margin-top: 15%;
+  }
+  
+  ion-button.personal-btn.signin-button.md.button.button-clear.ion-activatable.ion-focusable.hydrated {
+    margin-top: -70%;
+  }
+  
+  ion-button.personal-btn.entry-button.md.button.button-clear.ion-activatable.ion-focusable.hydrated {
+    margin-top: -50%;
+  }
+  
+  ion-card.content-card.sc-ion-card-md-h.sc-ion-card-md-s.md.hydrated {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10%;
+  }
+  
+  ion-card-content.md.card-content-md.hydrated {
+    font-family: monospace;
+    color: #235594;
+    font-weight: 900;
+  }

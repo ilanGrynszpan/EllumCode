@@ -26,7 +26,7 @@ Observações: Esta página cuida somente dos aspectos gráficos de tela, as int
 })
 export class LoginBasicPage implements OnInit {
 
-  private data_pckg = {
+  public data_pckg = {
 
     cpf: "", // essa variável será utilizada para o envio de dado de CPF ao back-end
     senha: "" // essa variável será utilizada para o envio de dado de senha ao back-end
@@ -67,7 +67,7 @@ export class LoginBasicPage implements OnInit {
 
     console.log(this.login_maker.log_in_cpf(this.data_pckg.cpf, this.data_pckg.senha)); /* envia evento de login so back-end,
                                                                     com mostra de resultado no console*/
-                                                                    
+
   }
 
   /*

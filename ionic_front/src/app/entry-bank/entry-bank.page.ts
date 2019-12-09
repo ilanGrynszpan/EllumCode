@@ -11,9 +11,9 @@ import { RestUrlsService } from '../rest-urls.service';
 })
 export class EntryBankPage implements OnInit {
 
-  private user_id:any = "";
+  public user_id:any = "";
   
-  private bank_info:any = {
+  public bank_info:any = {
 
     banco:"",
     agencia:"",

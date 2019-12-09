@@ -23,8 +23,8 @@ import { ServicoInformationInterfaceService } from '../servico-information-inter
 
 export class Tab1Page {
 
-  private current_service_index = 0;
-  private stored_data:any = {
+  public current_service_index = 0;
+  public stored_data:any = {
 
     user:{
       nome:"",

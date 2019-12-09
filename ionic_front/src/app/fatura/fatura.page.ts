@@ -11,7 +11,7 @@ import { Storage } from '@ionic/storage';
 })
 export class FaturaPage implements OnInit {
 
-  private devolucoes:any = [];
+  public devolucoes:any = [];
 
   constructor(private router: Router,
     private storage: Storage) { }
